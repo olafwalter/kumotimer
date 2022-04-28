@@ -1,81 +1,79 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+  <title>Kumo Timer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
 
-p {
-  text-align: left;
-  font-size: 60px;
-  margin-top: 0px;
-}
+  p {
+    text-align: left;
+    font-size: 64px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
 
-.btn {
-  border: none;
-  background-color: inherit;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  display: inline-block;
-}
+  .btn {
+    border: 1px solid;
+    background-color: inherit;
+    padding: 6px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+  }
 
-.btn:hover {background: #eee;}
-
-.success {color: green;}
-.info {color: dodgerblue;}
-.warning {color: orange;}
-.danger {color: red;}
-.default {color: black;}
-
-</style>
+  </style>
 </head>
+
 <body>
 
-<p id="demo"></p>
-
-<button class="btn 1 min" onclick="setTimer(1)">1 min</button>
-<button class="btn 2 min" onclick="setTimer(2)">2 min</button>
-<button class="btn 3 min" onclick="setTimer(3)">3 min</button>
-<button class="btn 5 min" onclick="setTimer(5)">5 min</button>
-<button class="btn 7 min" onclick="setTimer(7)">7 min</button>
-<button class="btn 10 min" onclick="setTimer(10)">10 min</button>
-<button class="btn 15 min" onclick="setTimer(15)">15 min</button>
-<button class="btn 30 min" onclick="setTimer(30)">30 min</button>
+  <p id="timer">Kumo Timer</p>
+  <button class="btn" onclick="setTimer(1*60)">1 min</button>
+  <button class="btn" onclick="setTimer(2*60)">2 min</button>
+  <button class="btn" onclick="setTimer(3*60)">3 min</button>
+  <button class="btn" onclick="setTimer(5*60)">5 min</button>
+  <button class="btn" onclick="setTimer(7*60)">7 min</button>
+  <button class="btn onclick="setTimer(10*60)">10 min</button>
+  <button class="btn" onclick="setTimer(15*60)">15 min</button>
+  <button class="btn" onclick="setTimer(30*60)">30 min</button>
+  <button class="btn" onclick="stopTimer()">Stop</button>
 
 <script>
 
+var x
+
 function setTimer(t) {
-    countDownDate = new Date().getTime()+t*60*1000;
+    countDownDate = new Date().getTime()+t*1000;
+    x = setInterval(countdown, 1000);
+    countdown()
 }
-// Set the date we're counting down to
-var countDownDate = new Date().getTime() // +3*60*1000;
 
-// Update the count down every 1 second
-var x = setInterval(function() {
+function stopTimer() {
+  clearInterval(x);
+    document.getElementById("timer").innerHTML = "Kumo Timer";
+}
 
-  // Get today's date and time
+// SGQDV: corrected for off-by-one error in example
+
+function countdown() {
+
   var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "min " + seconds + "s ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    // clearInterval(x);
-    document.getElementById("demo").innerHTML = "PPR DevOps Timer";
-  }
-}, 1000);
-</script>
+  var distance = Math.ceil((countDownDate - now)/1000);
+  var minutes = Math.floor(distance % (60 * 60) / 60);
+  var seconds = distance % 60;
 
+  if (minutes > 0) {
+    timeString = minutes + " min " + seconds + " s ";
+  } else {
+    timeString = seconds + " s ";
+  }
+  document.getElementById("timer").innerHTML = timeString;
+    
+  if (distance <= 0) {
+    clearInterval(x);
+    document.getElementById("timer").innerHTML = "Time is up";
+  }
+}
+
+</script>
 </body>
 </html>
