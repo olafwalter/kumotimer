@@ -5,38 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 
-  p {
+  div {
     text-align: left;
-    font-size: 64px;
-    margin-top: 10px;
-    margin-left: 10px;
+    font-size: 56px;
+    margin-top: 4px;
+    margin-left: 4px;
   }
 
   .btn {
-    border: 1px solid;
+    border: 1px transparent;
     background-color: inherit;
-    padding: 6px 10px;
-    font-size: 16px;
+    padding: 2px 4px;
+    font-size: 14px;
+    margin-bottom: 4px;
     cursor: pointer;
     display: inline-block;
   }
 
-  </style>
+  .btn:hover {
+    border: 1px transparent;
+    background-color: lightgray;
+    padding: 2px 4px;
+    font-size: 14px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+</style>
 </head>
 
 <body>
 
-  <p id="timer">Kumo Timer</p>
-  <button class="btn" onclick="setTimer(1*60)">1 min</button>
-  <button class="btn" onclick="setTimer(2*60)">2 min</button>
-  <button class="btn" onclick="setTimer(3*60)">3 min</button>
-  <button class="btn" onclick="setTimer(5*60)">5 min</button>
-  <button class="btn" onclick="setTimer(7*60)">7 min</button>
-  <button class="btn" onclick="setTimer(10*60)">10 min</button>
-  <button class="btn" onclick="setTimer(15*60)">15 min</button>
-  <button class="btn" onclick="setTimer(30*60)">30 min</button>
-  <button class="btn" onclick="stopTimer()">Stop</button>
-
+  <div id="timer">Kumo Timer</div>
+<table>
+  <tr>
+    <td><button class="btn" onclick="setTimer(1*60)">1 min</button></td>
+    <td><button class="btn" onclick="setTimer(1.5*60)">1&#189; min</button></td>
+    <td><button class="btn" onclick="setTimer(2*60)">2 min</button></td>
+    <td><button class="btn" onclick="setTimer(3*60)">3 min</button></td>
+    <td><button class="btn" onclick="setTimer(5*60)">5 min</button></td>
+  </tr><tr>
+    <td><button class="btn" onclick="setTimer(7*60)">7 min</button></td>
+    <td><button class="btn" onclick="setTimer(10*60)">10 min</button></td>
+    <td><button class="btn" onclick="setTimer(15*60)">15 min</button></td>
+    <td><button class="btn" onclick="setTimer(30*60)">30 min</button></td>
+    <td><button class="btn" onclick="stopTimer()">Stop</button>    
+  </tr>
+</table>
 <script>
 
 var x
