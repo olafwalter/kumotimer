@@ -66,6 +66,7 @@ function setTimer(t) {
 function stopTimer() {
   clearInterval(x);
     document.getElementById("timer").innerHTML = "Kumo Timer";
+    document.title = "Kumo Timer";
 }
 
 // SGQDV: corrected for off-by-one error in example
@@ -79,14 +80,19 @@ function countdown() {
 
   if (minutes > 0) {
     timeString = minutes + " min " + seconds + " s ";
+    shortTimeString = minutes + "'" + seconds + '"';
   } else {
     timeString = seconds + " s ";
+    shortTimeString = seconds + '"'
   }
   document.getElementById("timer").innerHTML = timeString;
+  document.title = shortTimeString + " (Kumo Timer)";
     
   if (distance <= 0) {
     clearInterval(x);
     document.getElementById("timer").innerHTML = "Time is up";
+    document.title = "Time is up (Kumo Timer)";
+
   }
 }
 
