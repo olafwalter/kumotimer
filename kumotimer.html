@@ -76,6 +76,8 @@ function sound(src) {
 }
 
 function setTimer(t) {
+    // Clear any existing interval before creating a new one
+    clearInterval(x);
     countDownDate = new Date().getTime()+t*1000;
     x = setInterval(countdown, 1000);
     ping = new sound("ping.wav");
@@ -85,8 +87,11 @@ function setTimer(t) {
 
 function stopTimer() {
   clearInterval(x);
-    document.getElementById("timer").innerHTML = "Kumo Timer";
-    document.title = "Kumo Timer";
+  document.getElementById("timer").innerHTML = "Kumo Timer";
+  document.title = "Kumo Timer";
+  if (ping) {
+    ping.stop();
+  }
 }
 
 // SGQDV: corrected for off-by-one error in example
@@ -107,13 +112,17 @@ function countdown() {
   }
   document.getElementById("timer").innerHTML = timeString;
   document.title = shortTimeString + " (Kumo Timer)";
-    
+
   if (distance <= 0) {
     clearInterval(x);
     document.getElementById("timer").innerHTML = "Time is up";
     document.title = "Time is up (Kumo Timer)";
     ping.play();
 
+    // Stop the ping sound after a short delay to ensure it plays only once
+    setTimeout(function() {
+      ping.stop();
+    }, 1000);
   }
 }
 
